@@ -1,6 +1,6 @@
 # ![](resources/images/n7_logo_icon_c_pebble_mono~color.png) Mass Effect V2 watchface, shamelessly forked from clach04
 
-![](resources/images/screenshot_basalt.png)
+![](screenshots/screenshot_basalt.png)
 
 Basic digital watch face for the Pebble smartwatch. Features:
   * Updates once per minute
