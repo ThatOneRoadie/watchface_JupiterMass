@@ -20,10 +20,11 @@
 
     #define BG_IMAGE_GRECT GRect(0, 15, 180, 180)
 #else /* PBL_RECT 144x168*/
-    #define CLOCK_POS GRect(0, 40, 144, 168) /* probably taller than really needed */
-    #define BT_POS GRect(0, 120, 144, 168) /* probably taller than really needed */
-    #define DATE_POS GRect(0, 140, 144, 168) /* probably taller than really needed */
-    #define BAT_POS GRect(0, 140, 144, 168) /* probably taller than really needed */
+    #define HOUR_POS GRect(8, -30, 80, 168) /* probably taller than really needed */
+    #define MIN_POS GRect(8, 5, 80, 168) /* probably taller than really needed */
+    #define BT_POS GRect(2, 100, 144, 168) /* probably taller than really needed */
+    #define DATE_POS GRect(2, 140, 144, 168) /* probably taller than really needed */
+    #define BAT_POS GRect(2, 120, 144, 168) /* probably taller than really needed */
 #endif /* end of Round or rectangle */
 
 /* for screen shots and font testing

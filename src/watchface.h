@@ -26,7 +26,7 @@
 #endif
 
 #ifndef BLUETOOTH_DISCONNECTED_STR
-#define BLUETOOTH_DISCONNECTED_STR "BT Disconnected"
+#define BLUETOOTH_DISCONNECTED_STR "Bluetooth D/C"
 #endif /* BLUETOOTH_DISCONNECTED_STR */
 
 #ifndef DATE_FMT_STR
@@ -34,7 +34,7 @@
 #define MAX_DATE_STR "Thu, 00 Aug"  /* if custom version of DATE_FMT_STR is set, MAX_DATE_STR  needs to be updated too */
 #endif /* DATE_FMT_STR */
 
-#define MAX_TIME_STR "00:00"
+#define MAX_TIME_STR "00"
 
 #ifndef BAT_FMT_STR
 #define BAT_FMT_STR "Bat: %d%%"
@@ -61,7 +61,7 @@
 #endif /* FONT_SYSTEM_NAME */
 
 #ifndef BT_ALIGN
-#define BT_ALIGN GTextAlignmentCenter
+#define BT_ALIGN GTextAlignmentLeft
 #endif /* BT_ALIGN */
 
 #ifndef BAT_ALIGN
@@ -69,7 +69,7 @@
 #endif /* BAT_ALIGN */
 
 #ifndef DATE_ALIGN
-#define DATE_ALIGN GTextAlignmentRight
+#define DATE_ALIGN GTextAlignmentLeft
 #endif /* TIME_ALIGN */
 
 #ifndef TIME_ALIGN

@@ -7,7 +7,8 @@
 
 
 Window    *main_window=NULL;
-TextLayer *time_layer=NULL;
+TextLayer *hour_layer=NULL;
+TextLayer *min_layer=NULL;
 TextLayer *date_layer=NULL;
 TextLayer *battery_layer=NULL;
 TextLayer *bluetooth_layer=NULL;
@@ -29,27 +30,27 @@ bool bluetooth_state = false;
 
 #ifdef DEBUG_TIME
 char * debug_time_list[] = {
-    "00:00",
-    "01:01",
-    "01:23",
-    "04:56",
-    "07:58",
-    "07:59",
-    "05:26",
-    "07:48",
-    "09:23",
-    "11:11",
-    "12:34",
-    "22:22",
-    "23:50",
-    "23:55",
+    "0000",
+    "0101",
+    "0123",
+    "0456",
+    "0758",
+    "0759",
+    "0526",
+    "0748",
+    "0923",
+    "1111",
+    "1234",
+    "2222",
+    "2350",
+    "2355",
     /* 12 hour format withOUT leading zero, or space */
-    "12:12",
-    "1:01",
-    "8:55",
+    "1212",
+    "101",
+    "855",
     /* 12 hour format withOUT leading zero, with  space */
-    " 1:01",
-    " 8:55",
+    " 101",
+    " 855",
     NULL
 };
 #endif /* DEBUG_TIME */
@@ -260,6 +261,7 @@ void update_time() {
 
     // Create a long-lived buffer
     static char buffer[] = MAX_TIME_STR;
+    static char buffer2[] = MAX_TIME_STR;
 
 #ifdef DEBUG_TIME
     {
@@ -282,10 +284,12 @@ void update_time() {
         // Write the current hours and minutes into the buffer
         if(clock_is_24h_style() == true) {
             // 24h hour format
-            strftime(buffer, sizeof(buffer), "%H:%M", tick_time);
+            strftime(buffer, sizeof(buffer), "%H", tick_time);
+            strftime(buffer2, sizeof(buffer), "%M", tick_time);
         } else {
             // 12 hour format
-            strftime(buffer, sizeof(buffer), "%I:%M", tick_time); // produces leading zero for hour and minute
+            strftime(buffer, sizeof(buffer), "%I", tick_time); // produces leading zero for hour and minute
+            strftime(buffer2, sizeof(buffer), "%M", tick_time);
 #ifdef REMOVE_LEADING_ZERO_FROM_TIME
             if (buffer[0] == '0')
             {
@@ -305,7 +309,8 @@ void update_time() {
 #endif /* NO_DATE */
 
     // Display this time on the TextLayer
-    text_layer_set_text(time_layer, buffer);
+    text_layer_set_text(hour_layer, buffer);
+    text_layer_set_text(min_layer, buffer2);
 
 #ifdef DEBUG_TIME_PAUSE
     psleep(DEBUG_TIME_PAUSE);
@@ -324,10 +329,14 @@ void main_window_load(Window *window) {
 #endif /* BG_IMAGE */
 
     // Create time TextLayer
-    time_layer = text_layer_create(CLOCK_POS);
-    text_layer_set_background_color(time_layer, GColorClear);
-    text_layer_set_text_color(time_layer, time_color);
-    text_layer_set_text(time_layer, "00:00");
+    hour_layer = text_layer_create(HOUR_POS);
+    text_layer_set_background_color(hour_layer, GColorClear);
+    text_layer_set_text_color(hour_layer, time_color);
+    text_layer_set_text(hour_layer, "00");
+    min_layer = text_layer_create(MIN_POS);
+    text_layer_set_background_color(min_layer, GColorClear);
+    text_layer_set_text_color(min_layer, time_color);
+    text_layer_set_text(min_layer, "00");
 
 #ifdef FONT_NAME
     // Create GFont
@@ -337,12 +346,15 @@ void main_window_load(Window *window) {
 #endif /* FONT_NAME */
 
     // Apply to TextLayer
-    text_layer_set_font(time_layer, time_font);
+    text_layer_set_font(hour_layer, time_font);  
+    text_layer_set_font(min_layer, time_font);
     /* Consider GTextAlignmentLeft (with monospaced font) in cases where colon is proportional */
-    text_layer_set_text_alignment(time_layer, TIME_ALIGN);
+    text_layer_set_text_alignment(hour_layer, TIME_ALIGN);
+    text_layer_set_text_alignment(min_layer, TIME_ALIGN);
 
     // Add it as a child layer to the Window's root layer
-    layer_add_child(window_get_root_layer(window), text_layer_get_layer(time_layer));
+    layer_add_child(window_get_root_layer(window), text_layer_get_layer(hour_layer));
+    layer_add_child(window_get_root_layer(window), text_layer_get_layer(min_layer));
 
 #ifndef NO_DATE
     setup_date(window);
@@ -392,7 +404,8 @@ void main_window_unload(Window *window) {
 #endif /* BG_IMAGE */
 
     /* Destroy TextLayers */
-    text_layer_destroy(time_layer);
+    text_layer_destroy(hour_layer);
+    text_layer_destroy(min_layer);
 
 
     /* unsubscribe events */
@@ -432,7 +445,8 @@ void in_recv_handler(DictionaryIterator *iterator, void *context)
                 APP_LOG(APP_LOG_LEVEL_DEBUG, "Persisting time color: 0x%06x", config_time_color);
                 persist_write_int(KEY_TIME_COLOR, config_time_color);
                 time_color = COLOR_FALLBACK(GColorFromHEX(config_time_color), GColorWhite);
-                text_layer_set_text_color(time_layer, time_color);
+                text_layer_set_text_color(hour_layer, time_color);
+                text_layer_set_text_color(min_layer, time_color);
 
                 if (date_layer) /* or #ifndef NO_DATE */
                 {
