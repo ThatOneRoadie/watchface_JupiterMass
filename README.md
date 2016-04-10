@@ -1,6 +1,6 @@
 # ![](resources/images/n7_logo_icon_c_pebble_mono~color.png) Mass Effect V2 watchface, shamelessly forked from clach04
 
-Screenshot to Time
+![](resources/images/screenshot_basalt.png)
 
 Basic digital watch face for the Pebble smartwatch. Features:
   * Updates once per minute
@@ -17,4 +17,4 @@ Acknowledgements
   * N7 Logo Vector by Karlika (http://karlika.deviantart.com/art/Mass-Effect-Vector-Pack-178422616)
   * html/js for color configuration based on code by https://github.com/rgarth and Slate https://github.com/pebble/slate
 
-Store URL 
+Store URL:  https://apps.getpebble.com/en_US/application/5709ba2faf95a45063000018
