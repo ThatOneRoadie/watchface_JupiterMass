@@ -7,9 +7,9 @@
     "capabilities": [
         "configurable"
     ],
-    "companyName": "clach04",
+    "companyName": "ThatOneRoadie",
     "enableMultiJS": false,
-    "longName": "Jupiter Mass Xen",
+    "longName": "Mass Effect V2",
     "projectType": "native",
     "resources": {
         "media": [
@@ -41,12 +41,12 @@
         ]
     },
     "sdkVersion": "3",
-    "shortName": "JupiterMassXen",
+    "shortName": "Mass Effect V2",
     "targetPlatforms": [
         "basalt"
     ],
     "uuid": "0ae8bb7b-9ecd-4e71-8fd8-7877db474401",
-    "versionLabel": "0.6",
+    "versionLabel": "0.7",
     "watchapp": {
         "watchface": true
     }
