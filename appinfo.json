@@ -8,10 +8,19 @@
         "configurable"
     ],
     "companyName": "clach04",
+    "enableMultiJS": false,
     "longName": "Jupiter Mass Xen",
     "projectType": "native",
     "resources": {
         "media": [
+            {
+                "file": "images/nswallpaper.png",
+                "name": "WATCH_WP",
+                "targetPlatforms": [
+                    "basalt"
+                ],
+                "type": "png"
+            },
             {
                 "file": "images/n7logo.png",
                 "name": "IMAGE_N7LOGO",
@@ -34,9 +43,7 @@
     "sdkVersion": "3",
     "shortName": "JupiterMassXen",
     "targetPlatforms": [
-        "aplite",
-        "basalt",
-        "chalk"
+        "basalt"
     ],
     "uuid": "0ae8bb7b-9ecd-4e71-8fd8-7877db474401",
     "versionLabel": "0.6",
